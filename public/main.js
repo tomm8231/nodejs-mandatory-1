@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listener to the link
     document.getElementById("fontToggle").addEventListener("click", toggleFont)
 
-    // Checks local storage for a selected font from ealier
+    // Checks local storage for a selected font from earlier
     const storedFont = localStorage.getItem("selectedFont")
     if (storedFont === "alt-font") {
         bodyElement.classList.add("alt-font")
