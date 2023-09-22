@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Perfect DOS VGA 437';
+    src: url("./dos_font.woff");
+}
+
+body {
+    font-family: monospace, sans-serif;
+    background-color: black;
+    color: white;
+}
+
+body.alt-font {
+    font-family: 'Perfect DOS VGA 437', sans-serif;
+}
+
+.fontToggle {
+    font-family: 'Perfect DOS VGA 437', sans-serif;
+}
+
+.fontToggle.alt-font {
+    font-family: monospace, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 15% 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "sidebar content";
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: black;
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    border: 2px solid white;
+    margin: 10px;
+    position: relative;
+    min-width: 100px;
+}
+
+.nav-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-div a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    margin: 2px;
+}
+
+
+.sidebar-div a:hover {
+    color: black;
+    background-color: white;
+    font-weight: bolder;
+}
+
+.frontpage .nav-links a.frontpage,
+.topic-1 .nav-links a.topic-1,
+.admin a.admin  {
+    color: black;
+    background-color: white;
+    font-weight: bold;
+}
+
+.misc a,
+.admin a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 2px;
+    bottom: 10px
+}
+
+.misc,
+.admin {
+    border-top: 2px solid white;
+}
+
+.content {
+    grid-area: content;
+    margin: 10px;
+    padding: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    border: 2px solid white;
+}
+
+pre {
+    border: 2px solid white;
+    padding-top: 10px;
+    padding-left: 5px;
+    margin-top: 10px;
+}
