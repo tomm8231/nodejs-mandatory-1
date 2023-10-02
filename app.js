@@ -5,6 +5,8 @@ const app = express()
 
 app.use(express.static("public"))
 
+// ================= HTML =================
+
 app.get("/", (req, res) => {
     res.sendFile(path.resolve("./public/frontpage/frontpage.html"))
 })
@@ -29,7 +31,10 @@ app.get("/type-coercion", (req, res) => {
     res.sendFile(path.resolve("./public/type-coercion/type-coercion.html"))
 })
 
-app.listen(8080, () => {
-    console.log("Server is running in port 8080");
+
+
+const PORT = 8080
+app.listen(PORT, () => {
+    console.log("Server is running on", PORT)
 })
 
