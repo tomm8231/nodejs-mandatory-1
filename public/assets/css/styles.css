@@ -6,7 +6,12 @@
 
 @font-face {
     font-family: 'Perfect DOS VGA 437';
-    src: url("./dos_font.woff");
+    src: url("/assets/fonts/dos_font.woff");
+}
+
+@font-face {
+    font-family: 'Raster';
+    src: url("/assets/fonts/raster_font.ttf");
 }
 
 body {
@@ -45,7 +50,7 @@ body.alt-font {
     border: 2px solid white;
     margin: 10px;
     position: relative;
-    min-width: 100px;
+    min-height: 90vh;
 }
 
 .nav-links ul {
@@ -69,7 +74,11 @@ body.alt-font {
 }
 
 .frontpage .nav-links a.frontpage,
-.topic-1 .nav-links a.topic-1,
+.express .nav-links a.express,
+.nodejs .nav-links a.nodejs,
+.nodemon .nav-links a.nodemon,
+.client-server-model .nav-links a.client-server-model,
+.type-coercion .nav-links a.type-coercion,
 .admin a.admin  {
     color: black;
     background-color: white;
@@ -97,11 +106,29 @@ body.alt-font {
     padding-left: 100px;
     padding-right: 100px;
     border: 2px solid white;
+    min-height: 90vh;
 }
 
+
 pre {
-    border: 2px solid white;
+    border: 1px solid white;
+    margin-left: 30px;
     padding-top: 10px;
-    padding-left: 5px;
+    padding-left: 25px;
     margin-top: 10px;
+    padding-right: 25px;
+    width: fit-content;
+    font-size: larger;
 }
+
+.snippet-javascript,
+.snippet-html {
+    background-color: #282c34;
+    font-family: monospace;
+}
+
+.snippet-command-line {
+    background-color: rgb(1, 36, 86);
+    font-family: monospace;
+}
+
