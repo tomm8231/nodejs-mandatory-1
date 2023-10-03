@@ -52,3 +52,19 @@ export const typeCoercionPage = renderPage(typeCoercion,
         cssLinks: `<link rel="stylesheet" href="/pages/type-coercion/type-coercion.css">`,
         bodyClass: "type-coercion"
     })
+
+const login = readPage("./public/pages/login/login.html")
+export const loginPage = renderPage(login,
+    {
+        tabTitle: "Mandatory I | Login",
+        cssLinks: `<link rel="stylesheet" href="/pages/login/login.css">`,
+        bodyClass: "admin"
+    })
+
+const admin = readPage("./public/pages/admin/admin.html")
+export const adminPage = renderPage(admin,
+    {
+        tabTitle: "Mandatory I | Admin",
+        cssLinks: `<link rel="stylesheet" href="/pages/admin/admin.css">`,
+        bodyClass: "admin"
+    })

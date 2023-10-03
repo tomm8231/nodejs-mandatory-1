@@ -5,9 +5,12 @@ const app = express()
 
 app.use(express.static("public"))
 
+app.use(express.json())
+
+
 // =============Read pages ============
 
-import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, typeCoercionPage } from "./util/preparePages.js"
+import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, typeCoercionPage, loginPage, adminPage } from "./util/preparePages.js"
 
 // ================= HTML =================
 
@@ -34,6 +37,34 @@ app.get("/client-server-model", (req, res) => {
 app.get("/type-coercion", (req, res) => {
     res.send(typeCoercionPage)
 })
+
+// ======= Login and Admin =========
+
+const hardcodedUsername = "admin"
+const hardcodedPassword = "nemathuske"
+
+app.get("/login", (req, res) => {
+    res.send(loginPage)
+  });
+
+/*
+app.post("/login", (req, res) => {
+    const { username, password } = req.body;
+    console.log(username);
+    console.log(password);
+  
+    if (username === hardcodedUsername && password === hardcodedPassword) {
+      res.redirect('/admin');
+    } else {
+      res.status(401).send({ data: 'Login failed' });
+    }
+  });
+  */
+
+  app.get("/admin", (req, res) => {
+    res.send(adminPage);
+  });
+  
 
 
 

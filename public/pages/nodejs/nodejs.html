@@ -1,5 +1,63 @@
-<div class="content">
-  <h1>Node.js</h1>
-  <p>Side om Node.js</p>
-</div>
-<script type="module" src="./nodejs.js"></script>
+<h1>Node.js</h1>
+<p>
+  Node.js (Node) er et miljø og ikke et programmeringssprog - JavaScript (JS) er
+  sproget og Node er miljøet, det skrives i. JS køres traditionelt i browseren,
+  men Node faciliterer, at koden kan eksekveres på serversiden, hvilket gør det
+  brugbart til backend-udvikling. Node har sin egen runtime, dvs. den nødvendige
+  infrastruktur, til at eksekvere JS-kode.
+</p>
+
+<p>
+  Fordi Node er cross-platform, fungerer det på tværs på forskellige
+  operativsystemer som Windows, macOS og Linux uden afvigende adfærd.
+</p>
+
+<p>
+  Det er derudover en open-source-platform, hvilket betyder, at kildekoden er
+  frit tilgængelig og kan modificeres af andre fra det community, der støtter op
+  om Node.
+</p>
+
+<p>
+  For at oprette et Node-projekt bruger man kommandoen “npm”, som står for node
+  package management, efterfulgt af “init”. Vil man gerne indledningsvist
+  tilføje detaljer til projektet, såsom beskrivelse, licens, den semantiske
+  version (læs om semantic versioning), følger man guiden, der startes.
+  Alternativt kan man i stedet bruge kommandoen “npm init -y”, som laver en
+  default-version af Node-projektet, som senere kan redigeres i
+  package.json-filen, der oprettes, når opsætningen er færdig.
+  Package.json-filen er kernen af et Node-projekt. Det indeholder væsentlig
+  metadata om projektet og definerer funktionelle attributter, som NPM bruger
+  til at installere dependencies, køre scripts og ikke mindst identificere
+  programmets entry point (ofte app.js, main.js eller index.js). I tilfælde af,
+  at man vil køre et Node-projekt, en anden har lavet, skal man køre
+  terminal-kommandoen “npm install” ved roden af projektet for at installere
+  dependencies, scripts osv., der ligger i package.json.
+</p>
+<p></p>
+<h2>Eksempel på at oprette et Node-projekt med npm init:</h2>
+<pre class="snippet-command-line">
+    <code>
+PS C:\Users\tommy\datamatiker\test> npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help init` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+package name: (test) project-name
+version: (1.0.0) 1.0.1
+description: A software project
+entry point: (index.js) app.js
+test command:
+git repository: github url
+keywords: keyword1, keyword2, keyword3
+author: THJ
+license: (ISC) MIT
+    </code>
+</pre>
+<script type="module" src="pages/nodejs/nodejs.js"></script>
