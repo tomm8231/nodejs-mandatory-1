@@ -5,30 +5,34 @@ const app = express()
 
 app.use(express.static("public"))
 
+// =============Read pages ============
+
+import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, typeCoercionPage } from "./util/preparePages.js"
+
 // ================= HTML =================
 
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("./public/frontpage/frontpage.html"))
+    res.send(frontpagePage)
 })
 
 app.get("/express", (req, res) => {
-    res.sendFile(path.resolve("./public/express/express.html"))
+    res.send(expressPage)
 })
 
 app.get("/nodejs", (req, res) => {
-    res.sendFile(path.resolve("./public/nodejs/nodejs.html"))
+    res.send(nodejsPage)
 })
 
 app.get("/nodemon", (req, res) => {
-    res.sendFile(path.resolve("./public/nodemon/nodemon.html"))
+    res.send(nodemonPage)
 })
 
 app.get("/client-server-model", (req, res) => {
-    res.sendFile(path.resolve("./public/client-server-model/client-server-model.html"))
+    res.send(clientServerModelPage)
 })
 
 app.get("/type-coercion", (req, res) => {
-    res.sendFile(path.resolve("./public/type-coercion/type-coercion.html"))
+    res.send(typeCoercionPage)
 })
 
 
