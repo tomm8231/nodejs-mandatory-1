@@ -10,7 +10,8 @@ app.use(express.json())
 
 // =============Read pages ============
 
-import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, typeCoercionPage, loginPage, adminPage } from "./util/preparePages.js"
+import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, 
+  typeCoercionPage, loginPage, adminPage } from "./util/preparePages.js"
 
 // ================= HTML =================
 
