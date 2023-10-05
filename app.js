@@ -69,8 +69,8 @@ app.post("/login", (req, res) => {
 
 
 
-const PORT = 8080
-app.listen(PORT, () => {
-    console.log("Server is running on", PORT)
-})
+  const PORT = Number(process.env.PORT) || 8080
 
+  app.listen(PORT, () => {
+      console.log("Server is running on port", PORT);
+  })

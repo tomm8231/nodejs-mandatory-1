@@ -9,7 +9,7 @@
     "start:prod": "cross-env PORT=80 node app.js",
     "start:dev": "cross-env PORT=8080 nodemon.cmd app.js",
     "build": "npm install",
-    "start": "node app.js"
+    "start": "cross-env PORT=80 node app.js"
   },
   "keywords": [],
   "author": "Tommy Helle Jensen",
