@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         localStorage.setItem("selectedFont", isAltFont ? "alt-font" : "default-font")
 
-        fontToggle.innerText = "skift til " + ((localStorage.getItem("selectedFont")==="alt-font") ? "normal" : "dos") + " font"
+        fontToggle.innerText = ((localStorage.getItem("selectedFont")==="alt-font") ? "normal" : "dos") + " font"
 
         if (localStorage.getItem("selectedFont") === "default-font") {
             fontToggle.classList.add("alt-font")
@@ -31,6 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
         bodyElement.classList.add("alt-font")
     }
 
-    document.getElementById('fontToggle').innerText = "skift til " + ((localStorage.getItem("selectedFont")==="alt-font" || null) ? "normal" : "dos") + " font"
+    document.getElementById('fontToggle').innerText = ((localStorage.getItem("selectedFont")==="alt-font" || null) ? "normal" : "dos") + " font"
 
 })
