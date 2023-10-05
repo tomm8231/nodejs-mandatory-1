@@ -8,8 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "cross-env PORT=80 node app.js",
     "start:dev": "cross-env PORT=8080 nodemon.cmd app.js",
-    "build": "npm install",
-    "start": "cross-env PORT=80 node app.js"
+    "build": "npm install"
   },
   "keywords": [],
   "author": "Tommy Helle Jensen",
