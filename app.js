@@ -1,5 +1,4 @@
 import express from "express"
-import path from "path"
 
 const app = express()
 
@@ -46,24 +45,24 @@ const hardcodedPassword = "nemathuske"
 
 app.get("/login", (req, res) => {
     res.send(loginPage)
-  });
+  })
 
-/*
+
 app.post("/login", (req, res) => {
-    const { username, password } = req.body;
-    console.log(username);
-    console.log(password);
+    const { username, password } = req.body
+    console.log(username)
+    console.log(password)
   
     if (username === hardcodedUsername && password === hardcodedPassword) {
-      res.redirect('/admin');
+      res.redirect('/admin')
     } else {
-      res.status(401).send({ data: 'Login failed' });
+      res.status(401).send({ data: 'Login failed' })
     }
-  });
-  */
+  })
+  
 
   app.get("/admin", (req, res) => {
-    res.send(adminPage);
+    res.send(adminPage)
   });
   
 
@@ -72,5 +71,5 @@ app.post("/login", (req, res) => {
   const PORT = Number(process.env.PORT) || 8080
 
   app.listen(PORT, () => {
-      console.log("Server is running on port", PORT);
+      console.log("Server is running on port", PORT)
   })
