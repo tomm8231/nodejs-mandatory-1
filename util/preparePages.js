@@ -76,3 +76,11 @@ export const javascriptPage = renderPage(javascript,
         cssLinks: `<link rel="stylesheet" href="/pages/javascript/javascript.css">`,
         bodyClass: "javascript"
     })
+
+const kangaroo = readPage("./public/pages/kangaroo/kangaroo.html")
+export const kangarooPage = renderPage(kangaroo,
+    {
+        tabTitle: "Mandatory I | Kangaroo",
+        cssLinks: `<link rel="stylesheet" href="/pages/kangaroo/kangaroo.css">`,
+        bodyClass: "kangaroo"
+    })

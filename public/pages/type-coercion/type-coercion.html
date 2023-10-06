@@ -1,3 +1,42 @@
-  <h1>Type coercion</h1>
-  <p>Side om type coercion</p>
+<h1>Type coercion</h1>
+<p>Type coercion i JavaScript (JS) forstås ved at datatyper automatisk bliver oversat til en anden i løbet af en
+  operation. Tanken må være, at JS forsøger at være behjælpelig, så man lægger to Numbers eller to Strings sammen i
+  stedet for en Number og en String, men dette kan føre til uforventede outputs.</p>
+<p>Neden for er et eksempel på type coercion eksekveret i Node.js REPL (Read-Eval-Print-Loop):</p>
+<pre class="terminal-snippet">
+  <code class="language-terminal">
+PS C:\Users\tommy\datamatiker> node
+Welcome to Node.js v20.5.1.
+Type ".help" for more information.
+> 2+"2"
+'22'
+  </code>
+</pre>
+
+<p>I ovenstående eksempel ses først et forsøg på at lægge tallet/Number 2 sammen med karakteren/String 2. Her
+  konverteres Number til en String og derefter konkateneres to nu to Strings, som blive “22”.</p>
+<p>Et andet sted, der kan foregå type coercion er ved sammenligning af forskellige datatyper. Nedenfor ses et eksempel
+  på to forskellige udfald afhængigt af, om der bruges strict equality eller loose equality ved sammenligning af to
+  forskellige datatyper:
+</p>
+
+<pre class="terminal-snippet">
+  <code class="language-terminal">
+PS C:\Users\tommy\datamatiker> node
+Welcome to Node.js v20.5.1.
+Type ".help" for more information.
+> 2 == "2"
+true
+> 2 === "2"
+false    
+  </code>
+</pre>
+
+<p>For at undgå ovenstående problemer kan man altså overveje at bruge en mere striks syntaks i form af strict equality
+  ved sammenligning, og man kan anvende funktioner, der konverterer en String til et Number eller omvendt alt afhængigt
+  af, om man ønsker at lave en udregning eller konkatenere.</p>
+
+
+
+
 <script type="module" src="/pages/type-coercion/type-coercion.js"></script>
