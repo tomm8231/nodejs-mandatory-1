@@ -1,3 +1,21 @@
-  <h1>Nodemon</h1>
-  <p>Side om Nodemon</p>
-<script type="module" src="pages/nodemon/nodemon.js"></script>
+<h1>Nodemon</h1>
+<p>Som nævnt i afsnittet om Node.js er npm en package manager til Node.js (Node), og med npm kan man installere packages, andre
+  har udviklet til Node. Bl.a. findes der Nodemon, som er et værktøj, der kan behjælpelig i udviklingsfasen med at få
+  vist en opdateret udgave af produktet. Altså applikationen genstartes automatisk, når der sker ændringer.</p>
+  
+  <p>Node-projektet monitoreres ved at man bruger Nodemon-kommandoen “nodemon.cmd” (hvis man bruger PC) i stedet for
+  “node”, fordi Nodemon er en replacement wrapper, efterfulgt af navn og extension på Node-programmet. Det vil i mange
+  tilfælde ende med at se ud som følgende: “nodemon.cmd app.js”:</p>
+
+  <pre class="terminal-snippet">
+    <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> nodemon.cmd app.js
+[nodemon] 3.0.1
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node app.js`
+Server is running in port 8080
+    </code>
+  </pre>
+  <script type="module" src="pages/nodemon/nodemon.js"></script>

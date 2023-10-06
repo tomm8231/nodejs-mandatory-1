@@ -1,0 +1,304 @@
+<h1>JavaScript</h1>
+<p></p>
+<h2>Datatyper i JavaScript (JS)</h2>
+<p>
+<ul class="bullet-points">
+    <li><strong>Number:</strong> Numeriske værdier, både integers og floating-points</li>
+    <li><strong>String:</strong> Kæder af tegn (tekstform)</li>
+    <li><strong>Boolean:</strong> True- eller false-værdier</li>
+    <li><strong>Symbol:</strong> Unikke og immutable værdier</li>
+    <li><strong>BigInt:</strong> Tal større end 2^53, som er grænsen for Number. Denne datatype blev introduceret i
+        2019. Indtil da har man måttet bruge sine egne omveje og biblioteker</li>
+    <li><strong>undefined:</strong> Ikke-initialiserede og undefined værdier.</li>
+    <li><strong>null:</strong> Fravær af nogen som helst værdi</li>
+    <li><strong>Object:</strong> Kompleks datastruktur, der kan indeholde key-value pairs og metoder. I JS er der tre
+        typer objekter: Object, Array og Date.</li>
+</ul>
+</p>
+
+
+<h2>Funktioner</h2>
+<p>
+    I JavaScript er map(), find(), filter(), findIndex() og sort() funktioner, der bruges til at arbejde med arrays.
+    Disse kaldes også higher-order functions og går under kategorien funktionel programmering. Higher-order functions
+    tager andre funktioner som argument eller returnerer funktioner. De nedenstående funktioner gør det muligt at lave
+    operationer på datastrukturer uden at lave eksplicitte loops og i stedet indkapsler loop-logikken inden i
+    funktionen, og dermed undgår side effects. Her er en kort forklaring på hver af dem:
+</p>
+
+<p>
+    map() er en funktion, der anvendes til at oprette et nyt array ved at anvende en funktion på hvert element i det
+    oprindelige array. Den returnerer et nyt array med resultaterne af funktionen anvendt på hvert element i det
+    oprindelige array. Det nye array vil altså have samme længde som det oprindelige. For eksempel:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const numbers = [1, 2, 3, 4]
+const squaredNumbers = numbers.map(num => num * num)
+    </code>
+</pre>
+
+<p>Her vil squaredNumbers være [1, 4, 9, 16].</p>
+
+
+<p>
+    find() er en funktion, der bruges til at finde det første element i et array, der opfylder en given betingelse og
+    returnerer dette element. Hvis ingen elementer opfylder betingelsen, returneres undefined. For eksempel:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const fruits = ["apple", "banana", "cherry", "date"]
+const result = fruits.find(fruit => fruit === "cherry")
+    </code>
+</pre>
+
+
+<p>Her vil result være "cherry".</p>
+
+<p>
+    filter() er en funktion, der opretter et nyt array med alle elementer fra det oprindelige array, der opfylder en
+    given betingelse. Den returnerer et nyt array med de elementer, der lever op til betingelsen. For eksempel:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const numbers = [1, 2, 3, 4, 5, 6]
+const evenNumbers = numbers.filter(num => num % 2 === 0)
+    </code>
+</pre>
+
+<p>Her vil evenNumbers være [2, 4, 6].</p>
+
+<p>
+    sort() er som standard en funktion, der bruges til at sortere elementerne i et array i stigende rækkefølge. Den
+    bruger det oprindelige array og returnerer elementerne i en sorteret rækkefølge. Sorteringen fungerer ved at
+    elementerne bliver konverteret til Strings og sammenlignet ud fra deres Unicode-værdier. For eksempel:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const fruits = ["banana", "cherry", "apple", "date"]
+fruits.sort()        
+    </code>
+</pre>
+
+<p>Nu vil fruits være ["apple", "banana", "cherry", "date"]</p>
+
+<p>
+    Hvis det et array skal sorteres numerisk eller anden tilpasset logik, kan man eksplicit angive en
+    sammenligningsfunktion som argument til sort(). I dette tilfælde en faldende rækkefølge:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const numbers = [10, 2, 5, 1, 8]
+numbers.sort((a, b) => b - a)        
+    </code>
+</pre>
+
+<p>Her vil numbers så være [10, 8, 5, 2, 1].</p>
+
+<p>Vil man sortere Strings efter længde, kan sammenligningsfunktionen skrives således:</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const words = ["apple", "banana", "cherry", "date"]
+words.sort((a, b) => a.length - b.length)
+    </code>
+</pre>
+
+
+<p>Her vil words nu være ["date", "apple", "cherry", "banana"].</p>
+
+
+<p>
+    Og vil man sortere objekter efter en bestemt egenskab, kan sammenligningsfunktionen skrives sålådes, hvis man vil
+    sortere efter alder:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const persons = [
+    { name: "Alice", age: 30 },
+    { name: "Bob", age: 25 },
+    { name: "Charlie", age: 35 }
+]
+
+persons.sort((a, b) => a.age - b.age)
+    </code>
+</pre>
+
+
+<p>
+    findIndex() er en funktion, der returnerer indekset af det første element i et array, der opfylder en given
+    betingelse. Hvis ingen elementer opfylder betingelsen, returnerer den -1. For eksempel:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const numbers = [10, 20, 30, 40, 50]
+const index = numbers.findIndex(num => num > 25)
+    </code>
+</pre>
+
+
+<p>Her vil index være 2, da det første tal større end 25 er 30, som har indeks 2 i arrayet.</p>
+
+<p>
+    Som nævnt ovenfor, gør disse funktioner, at man undgår side effects, som er når en funktion kommer til at lave en
+    ændring på noget uden for sit scope. Her er et eksempel:´
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+function appendValue(array, value) {
+    array.push(value)
+}
+    </code>
+</pre>
+
+<p>
+    En callback-funktion er en funktion, der overføres som et argument til en anden funktion og udføres senere som
+    respons på en bestemt handling. Her er et eksempel, der bruger genericActionPerformer() som den primære funktion og
+    jump() som en callback:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+function genericActionperformer(genericAction, name) {
+    return genericAction(name)
+}
+
+const jump = (name) => `${name} is jumping`
+
+String action = genericActionPerformer(jump, “Carsten”)
+    </code>
+</pre>
+
+<p>Her vil action være “Carsten is jumping”.</p>
+
+<p>
+    Hoisting er en adfærd i JavaScript, hvor deklarationer af variabler og funktioner "løftes" til toppen af deres
+    respektive scopes under kompileringen. Her er et eksempel med hoistedFunction():
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+    hoistedFunction() // Udføres uden fejl pga. hoisting
+
+    function hoistedFunction() {
+        console.log("Hoisting eksempel")
+    }
+    </code>
+</pre>
+
+
+<p></p>
+<h2>Funktionstyper</h2>
+
+<p>Deklarerede funktioner defineres med keyword function og et tildelt navn. Her er et eksempel:</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+function add(a, b) {
+    return a + b
+}
+    </code>
+</pre>
+
+
+<p>
+    Anonyme funktioner er funktioner uden navn og kan gemmes i variabler. Her er et eksempel på en anonym funktion gemt
+    i en variabel:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const subtract = function(a, b) {
+    return a - b
+}
+    </code>
+</pre>
+
+<p>
+    Arrow-funktioner er en mere kompakt syntaks til at definere funktioner ved hjælp af => og uden keyword function.
+    Nedenfor er der eksempler på arrow-funktioner med og uden “return”. “return” skal eksplicit skrives i en block, og
+    det ligger implicit, hvis der ikke i er en block:
+</p>
+
+
+<pre class="code-snippet">
+    <code class="language-js">
+const multiply = (a, b) => a * b
+
+const divide = (a, b) => {
+    return a / b
+}     
+    </code>
+</pre>
+
+
+<p>De tre typer objekter, Object, Array og Date vil nedenfor forklares og gives eksempler på:</p>
+
+<p>Object: Kompleks datastruktur, der består af key-value pairs, som kan være de ovenstående datatyper samt funktioner:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 30,
+    greet: function() {
+        console.log(`Hello, my name is ${this.firstName} ${this.lastName}.`)
+    }
+}            
+    </code>
+</pre>
+
+<p>
+    Array: Et Array en slags objekt i JS som bliver brugt til at opbevare collections i en bestemt rækkefølge. Det
+    indekseres
+    efter integers, hvor plads nr. 1 har indeks 0, plads nr. 2 har indeks 1 osv. På den måde kan et Array indeholde
+    adskillige værdier. Nedenfor er et eksempel med frugter:
+</p>
+
+<pre class="code-snippet">
+    <code class="language-js">
+const fruits = ['apple', 'banana', 'cherry']
+    </code>
+</pre>
+
+<p>
+    Date: Date-objektet bruges til at arbejde med datoer og tider i JS. Det gør en i stand til at oprette, manipulere og
+    formatere tidspunkter. Her er måden man finder tidspunktet lige nu:
+</p>
+
+<pre class="terminal-snippet">
+    <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\test> node
+Welcome to Node.js v20.5.1.
+Type ".help" for more information.
+> new Date().toLocaleString()
+'6.10.2023 15.56.24'
+    </code>
+</pre>
+
+<p>
+    toLocaleString() gør man det bliver parset til en String og til ens lokale tidspunkt frem for UTC-tudspuntet, som
+    ellers ville have været nedenstående, hvis de var blevet kaldt på nøjagtigt samme tidspunkt:
+</p>
+
+<pre class="terminal-snippet">
+    <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\test> node
+Welcome to Node.js v20.5.1.
+Type ".help" for more information.
+> new Date().toUTCString()
+'Fri, 06 Oct 2023 13:56:24 GMT'
+    </code>
+</pre>
+
+<script src="./javascript.js"></script>

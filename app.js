@@ -10,7 +10,7 @@ app.use(express.json())
 // =============Read pages ============
 
 import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, 
-  typeCoercionPage, loginPage, adminPage } from "./util/preparePages.js"
+  typeCoercionPage, loginPage, adminPage, javascriptPage } from "./util/preparePages.js"
 
 // ================= HTML =================
 
@@ -36,6 +36,10 @@ app.get("/client-server-model", (req, res) => {
 
 app.get("/type-coercion", (req, res) => {
     res.send(typeCoercionPage)
+})
+
+app.get("/javascript", (req, res) => {
+  res.send(javascriptPage)
 })
 
 // ======= Login and Admin =========

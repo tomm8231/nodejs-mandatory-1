@@ -1,111 +1,236 @@
-  <h1>Express</h1>
-  <p>Side om Express</p>
-  <pre class="code-snippet">
-                <code class="language-js">
-function helloWorld() {
-    console.log("Hello, World!");
+<h1>Express</h1>
+<p>
+    Express er et populært web framework til Node, som i programmet tager sig af HTTP requests, GET, POST, PUT, PATCH,
+    DELETE, routing og statiske filer. Selve frameworket er meget minimalistisk, men der er mulighed for at installere
+    alskens packages lavet af andre udviklere fra community’et omkring Node. Det betyder, at man fra begyndelsen får et
+    framework skrabet helt ind til benet, som man selv skal bygge op, så det passer til ens program, i stedet for at
+    have installeret packages, der aldrig vil blive brugt. Dette har betydning for den overordnede performance.
+</p>
+
+<p>
+    Frameworks er enten opinionated eller unopinionated. Et opinionated framework har en “holdning” til, hvordan en
+    specifik opgave skal løses. Fordelen ved dette er, at der er en god dokumentation for, hvordan man kommer frem til
+    sit mål, hvilket kan være betryggende for udviklere uden den store erfaring. Til gengæld er fremgangsmåden ikke
+    fleksibel. Et eksempel på opinionated software er Wiki-systemer, der kræver en helt særlig opsætning, hvor der ikke
+    er mulighed for at brugerdefinere sin side. Til gengæld får man en gennemtestet og genkendelig struktur. Af
+    opinionated frameworks er Ruby on Rails et eksempel.
+</p>
+
+<p>
+    Express er dog et unopinionated framework, som betyder, at der findes adskillige måder at nå sit mål på, og man skal
+    selv finde værktøjer og packages til det. Dette giver selvfølgelig mere fleksibilitet, dog kan man nemmere ende i en
+    blindgyde eller fare vild, hvis man ikke er dygtig til at læse dokumentationen og forstå mulighederne og
+    begrænsningerne ved de forskellige værktøjer.
+</p>
+
+<p>
+    Vil man gerne holdes i hånden, bør man overveje et opinionated framework - ønsker man fleksibilitet bør man overveje
+    et unopinionated framework
+</p>
+
+<p>
+    Eksempel på Express efterfulgt af forklaring:
+</p>
+
+<p>templateEngine.js:</p>
+<pre class="code-snippet">
+    <code class="language-js">
+import fs from 'fs'
+
+export function readPage(filePath) {
+    return fs.readFileSync(filePath).toString()
 }
-                </code>
-            </pre>
-  <pre class="code-snippet">
-                <code class="language-html">
-&lt;h2&gt;Eksempel på HTML&lt;/h2&gt;
-                </code>
-            </pre>
-  <pre class="terminal-snippet">
-                <code class="language-terminal">
-PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> nodemon.cmd app.js
-[nodemon] 3.0.1
-[nodemon] to restart at any time, enter `rs`
-[nodemon] watching path(s): *.*
-[nodemon] watching extensions: js,mjs,cjs,json
-[nodemon] starting `node app.js`
-Server is running in port 8080
-                </code>
-     </pre>
 
-     <pre class="code-snippet">
-        <code class="language-js">
-app.get("/mountains", (req, res) => {
-    res.send({ data: mountains })
+export function renderPage(page) {
+    const navbar = fs.readFileSync("./public/components/navbar/navbar.html").toString()
+    const footer = fs.readFileSync("./public/components/footer/footer.html").toString()
+
+    return navbar + page + footer
+}        
+    </code>
+</pre>
+
+<p>app.js:</p>
+<pre class="code-snippet">
+    <code class="language-js">
+import express from "express"
+const app = express()
+
+app.use(express.static("public"))
+app.use(express.json())
+
+// =============Read pages ============
+
+import { readPage, renderPage } from "./util/templateEngine.js"
+
+const frontpage = readPage("./public/pages/frontpage/frontpage.html")
+const frontpagePage = renderPage(frontpage)
+
+// ================= HTML =================
+
+app.get("/", (req, res) => {
+    res.send(frontpagePage)
 })
 
-app.get("/mountains/:id", (req, res) => {
-    const pathVariableMountainId = Number(req.params.id)
-    const mountainFound = mountains.find((mountain) => mountain.id === pathVariableMountainId)
-
-
-    if (!pathVariableMountainId || pathVariableMountainId < 1) {
-        res.send({ error: "Mountain id must be a number above 0" })
-
-    } else if (!mountainFound) {
-        res.send({ error: "No mountain found with that ID" })
-
+app.post("/login", (req, res) => {
+    const { username, password } = req.body;
+ 
+    if (// condition of valid login info) {
+      // Handling valid login info
     } else {
-        res.send({ data: mountainFound })
-    }
-})
-
-
-app.post("/mountains", (req, res) => {
-    const newMountain = {
-        "id": ++count,
-        "name": req.body.name,
-        "height": req.body.height
-    }
-    
-    mountains.push(newMountain)
-    res.send({ data: newMountain })
-})
-
-app.delete("/mountains/:id", (req, res) => {
-    const pathVariableMountainId = Number(req.params.id)
-    const indexFound = mountains.findIndex((mountain) => mountain.id === pathVariableMountainId)
-
-    if (indexFound === -1) {
-        res.status(404).send({ error: "No mountain found with that ID" })
-
-    } else {
-        mountains.splice(indexFound, 1)
-        res.send({ data: pathVariableMountainId })
-    }
-})
-
-app.put("/mountains/:id", (req, res) => {
-    const pathVariableMountainId = Number(req.params.id)
-    const mountainFound = mountains.find((mountain) => mountain.id === pathVariableMountainId)
-    const index = mountains.indexOf(mountainFound)
-
-    if (!pathVariableMountainId || pathVariableMountainId < 1) {
-        res.send({ error: "Mountain ID must be a number above 0" })
-
-    } else if (!mountainFound) {
-        res.send({ error: "No mountain found with that ID" })
-
-    } else {
-        mountains[index].id = pathVariableMountainId
-        mountains[index].name = req.body.name
-        mountains[index].height = req.body.height
-        res.send({ data: mountainFound })
-    }
-})
-
-app.patch("/mountains/:id", (req, res) => {
-    const pathVariableMountainId = Number(req.params.id);
-    let foundIndex = mountains.findIndex((mountain) => mountain.id === pathVariableMountainId);
-
-    if (foundIndex === -1) {
-        res.status(404).send({ error: "No mountain found with that ID" })
-
-    } else {
-        mountains[foundIndex] = { ...mountains[foundIndex], ...req.body, id: pathVariableMountainId }
-
-        res.send({ data: mountains[foundIndex] })
+      // Handling invalid login info
     }
 });
-            
-        </code>
-     </pre>
+
+app.listen(8080, () => {
+   console.log("Server is running in port 8080");
+})
+    </code>
+</pre>
+
+<p>Medmindre andet angivet, henvises der til app.js:</p>
+<p>“import express from 'express'” sammen med “const app = express()” importerer Express-modulet og opretter en
+    Express-applikation.</p>
+<p>Objektet “app” indeholder metoder, der f.eks. kan route HTTP requests og rendere HTML views.</p>
+<p>“app.get()” er en route definition og er en callback-funktion, som bliver kaldt, når der bliver lavet en HTTP GET
+    request på sidens rod efterfulgt af endpointet, i dette tilfælde “/”. Funktionen tager imod et request- og
+    response-objekt som argumenter og kalder sendFile() på response-objektet for at returnere frontpage.html til
+    klienten.</p>
+<p>For at de statiske filer (HTML, CSS, JS, billeder m.m.) kan vises, bruges en middleware-funktion
+    “express.static("public")”, som følger med Express-modulet. Den tager et enkelt argument ind, som er stien til den
+    mappe, som man ønsker at serve statiske filer. I dette tilfælde er det mappen “public”. Når man så fra klientsiden
+    forsøger at tilgå en URL, der svarer til en fil inden i “public”-mappen, vil Express finde og serve den ønskede fil.
+    Uden static-funktionen, ville filerne ikke kunne blive servet af Express, og de ville ikke kunne blive vist på
+    client-siden.</p>
+<p>I tilfælde af, at der er data, der skal leveres via en body, skal der bruges en “body parser”. Med Express kan
+    statement app.use(express.json()) anvendes. Dette er relevant ved POST-requests, som f.eks. ved login. I eksemplet
+    ovenfor ville funktionen app.post() ikke fungere uden.</p>
+<p>For at kunne sende navigationsbaren, det unikke indhold samt footeren ud samlet, importeres modulet “fs” (file
+    system), som tillader en at læse og skrive filer. Se templateEngine.js. I “fs” er der en indbygget funktion
+    “readFileSync(filePath)”, som tager stien til den fil, man ønsker at få læst, som argument, som så gør filen til en
+    String med .toString()-funktionen. I dette tilfælde, er det de to navbar- og footer-components og HTML-siden med det
+    unikke indhold. Først gøres det med frontpage.html i funktionen readPage(), der gemmes i variablen const frontpage,
+    derefter køres funktionen renderPage(), som tager variablen frontpage (eller en anden side, man ønsker renderet) som
+    argument. renderPage() kører dernæst readFileSync()-funktionen med stierne til navigationsbaren og footeren som
+    argument og gemmer dem i hver deres variabel: const navbar og const footer. Til sidst konkateneres navbar, page og
+    footer, som tilsammen udgør en hel side, der sendes til clienten.</p>
+<p>Til sidst er der “app.listen()”, som starter serveren på en angivet port, i dette tilfælde 8080, og som printer en
+    besked i konsollen om at serveren er oppe at køre, når programmet startes. Når serveren kører, kan man tilgå
+    "localhost:8080/" for at se frontpage.html blive vist på klientsiden.</p>
+<p>Ovenstående kode vil ikke kunne fungere, før Express er installeret, hvilket sker fra roden af projektet med
+    terminal-kommandoen “npm i express”, hvor 'i' repræsenterer “install”. Når kommandoen er kørt, vil det fremgå i
+    package.json, at Express er en dependency til projektet:</p>
+
+<pre class="terminal-snippet">
+    <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\test> npm i express
+
+added 58 packages in 2s
+
+8 packages are looking for funding
+  run `npm fund` for details
+PS C:\Users\tommy\datamatiker\test> ls
 
 
-<script type="module" src="pages/express/express.js"></script>
+    Directory: C:\Users\tommy\datamatiker\test
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        02-10-2023     11:26                node_modules
+-a----        02-10-2023     11:26          22186 package-lock.json
+-a----        02-10-2023     11:26             53 package.json
+
+
+PS C:\Users\tommy\datamatiker\test> cat package.json
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+
+    </code>
+</pre>
+
+<p>
+    Derudover bliver mappen “node_modules” oprettet ved samme lejlighed, som indeholder packages, man har installeret.
+    Disse vil fremgå i package.json, og ved at skrive “npm install” installeres disse og lægges i node_modules. Sletter
+    man mappen, vil dele af programmet, som er afhængige af en download package, derfor ikke fungere. Kloner man et
+    Node-projekt fra f.eks. GitHub, vil/bør node_modules ikke følge med, da man ved at skrive “npm install” i terminalen
+    installerer de nødvendige dependencies:
+</p>
+<p>
+    Her forsøges et Node-projekt at blive starte uden node_modules-mappen, hvor der vil stå, at et modul ikke er fundet:
+</p>
+<pre class="terminal-snippet">
+    <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\test> node app.js
+node:internal/errors:496
+    ErrorCaptureStackTrace(err);
+    ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'express' imported from C:\Users\tommy\datamatiker\nodejs\test\app.js
+    at new NodeError (node:internal/errors:405:5)
+    at packageResolve (node:internal/modules/esm/resolve:782:9)
+    at moduleResolve (node:internal/modules/esm/resolve:831:20)
+    at defaultResolve (node:internal/modules/esm/resolve:1036:11)
+    at DefaultModuleLoader.resolve (node:internal/modules/esm/loader:251:12)
+    at DefaultModuleLoader.getModuleJob (node:internal/modules/esm/loader:140:32)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/module_job:76:33)
+    at link (node:internal/modules/esm/module_job:75:36) {
+    code: 'ERR_MODULE_NOT_FOUND'
+}
+    </code>
+</pre>
+
+<p>Kører man kommandoen npm install, vil alt være godt igen:</p>
+
+<pre class="terminal-snippet">
+    <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\test> npm install
+
+added 58 packages, and audited 59 packages in 2s
+
+8 packages are looking for funding
+    run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\tommy\datamatiker\nodejs\test> node app.js
+Kører på port 8081        
+    </code>
+</pre>
+
+<p>
+    I forhold til strukturering af frontenden, viser nedenstående træ en opdeling, som gør det overskueligt for en
+    udvikler: I “assets” ligger css-, js-, og font-filer, som bruges på tværs af siderne. I “components” ligger de
+    HTML-komponenter, som er ens på alle HTML-siderne, nemlig navigationsbaren og footeren. I “pages” ligger så det
+    unikke indhold til de forskellige HTML-sider. Det gør det nemmere at tilgå, fordi alt, der er i en HTML-fil under
+    pages, er det unikke indhold, som ikke forstyrres af det indhold, der går igen. Dette er smart, særligt hvis der
+    skal ændres i en component, da man undgår at skulle ændre det lige så mange steder, som der er undersider. På den
+    måde fremmes strømlining og tidsoptimering:
+</p>
+
+<pre class="terminal-snippet">
+    <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\mandatory_1\public> tree
+Folder PATH listing
+Volume serial number is 4A10-1D6F
+C:.
+├───assets
+│   ├───css
+│   ├───fonts
+│   └───js
+├───components
+│   ├───footer
+│   └───navbar
+└───pages
+    ├───admin
+    ├───express
+    ├───frontpage
+    └───login
+    </code>
+</pre>
+
+
+
+<script type="module" src="pages/express/express.js"></script

@@ -68,3 +68,11 @@ export const adminPage = renderPage(admin,
         cssLinks: `<link rel="stylesheet" href="/pages/admin/admin.css">`,
         bodyClass: "admin"
     })
+
+const javascript = readPage("./public/pages/javascript/javascript.html")
+export const javascriptPage = renderPage(javascript,
+    {
+        tabTitle: "Mandatory I | JavaScript",
+        cssLinks: `<link rel="stylesheet" href="/pages/javascript/javascript.css">`,
+        bodyClass: "javascript"
+    })
