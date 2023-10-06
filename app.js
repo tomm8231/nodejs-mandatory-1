@@ -42,7 +42,7 @@ app.get("/javascript", (req, res) => {
   res.send(javascriptPage)
 })
 
-app.get("/kangaroo", (req, res) => {
+app.get("/joey", (req, res) => {
   res.send(kangarooPage)
 })
 // ======= Login and Admin =========
