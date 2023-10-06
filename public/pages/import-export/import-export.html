@@ -1,3 +1,66 @@
 <h1>Import/export</h1>
-<p>Side om import/export...</p>
+<p>
+    require() og import/export er begge til for at inkludere og håndtere eksterne kodemoduler, men de er forskellige,
+    når det kommer til syntaks og muligheder og begrænsninger.
+</p>
+<p>
+    require() er et CommonJS modulsystem, der primært bruges til server-side JavaScript, og som loader moduler synkron.
+</p>
+<p>
+    Import/export kom med modulsystemet ES6 (ECMAScript 2015 - en større revision af JavaScript), som er designet både
+    til client-side og server-side JavaScript, og som understøtter asynkron loading af moduler.
+</p>
+<p>
+    Syntaktisk er der også forskel på de to systemer: CommonJS bruger en funktion til at loade et modul, f.eks:
+</p>
+<pre class="code-snippet">
+    <code class="language-js">
+const express = require('express')        
+    </code>
+</pre>
+<p>
+    Omvendt bruger ES6 deklarative statements for enten at importere eller eksportere moduler:
+</p>
+<pre class="code-snippet">
+    <code class="language-js">
+import express from "express"
+    </code>
+</pre>
+<p>
+    Hvor CommonJS ikke skelner mellem default og navngivet exports, men i stedet eksporterer et helt objekt med alt dens
+    indhold, kan man med ES6 eksplicit angive, hvad der skal eksporteres.
+</p>
+<p>
+    I tilfælde af, at man ønsker at bruge ES6 og dets import/export-mulighed, skal man huske at tilføje key-value pair
+    “type” og “module” til sin package.json-fil:
+</p>
+<pre class="json-snippet">
+    <code class="language-json">
+{
+    "type": "module"
+}
+    </code>
+</pre>
+<p>
+    Eksempler på at eksportere elementer, hvis de ligger i en anden fil. Det første eksempel skrives “export”
+    umiddelbart før funktionen. I det sidste eksempel laves der et statement, som fortæller, hvilke funktioner fra
+    filen, der skal eksporteres:
+</p>
+<pre class="code-snippet">
+    <code class="language-js">
+export function addExtinctDinosaur(extinctDinosaur) {
+    extinctDinosaurs.push(extinctDinosaur)
+}
+
+export {
+    getExtinctDinosaurs,
+    addExtinctDinosaur
+}        
+    </code>
+</pre>
+
+
+
+
+
 <script src="/pages/import-export/import-export.js"></script>

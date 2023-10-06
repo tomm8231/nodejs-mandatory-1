@@ -98,6 +98,8 @@ p {
 .nodemon .nav-links a.nodemon,
 .client-server-model .nav-links a.client-server-model,
 .type-coercion .nav-links a.type-coercion,
+.joeys .nav-links a.joeys,
+.import-export .nav-links a.import-export,
 .javascript .nav-links a.javascript,
 .admin a.admin {
     color: black;
@@ -130,8 +132,6 @@ p {
     overflow-x: auto;
 
 }
-
-
 
 pre {
     border: 1px solid white;
@@ -171,6 +171,10 @@ code::before {
     content: "Terminal"
   }
 
+  code.language-json::before {
+    content: "JSON"
+  }
+
 
 
 .code-snippet {
@@ -180,6 +184,12 @@ code::before {
 
 .terminal-snippet {
     background-color: rgb(1, 36, 86);
+    font-family: monospace;
+}
+
+.json-snippet {
+    background-color: #4e4e4e;
+    color: yellow;
     font-family: monospace;
 }
 

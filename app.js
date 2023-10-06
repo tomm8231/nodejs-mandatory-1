@@ -10,7 +10,7 @@ app.use(express.json())
 // =============Read pages ============
 
 import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, 
-  typeCoercionPage, loginPage, adminPage, javascriptPage, kangarooPage } from "./util/preparePages.js"
+  typeCoercionPage, loginPage, adminPage, javascriptPage, joeysPage, importExportPage } from "./util/preparePages.js"
 
 // ================= HTML =================
 
@@ -42,9 +42,14 @@ app.get("/javascript", (req, res) => {
   res.send(javascriptPage)
 })
 
-app.get("/joey", (req, res) => {
-  res.send(kangarooPage)
+app.get("/joeys", (req, res) => {
+  res.send(joeysPage)
 })
+
+app.get("/import-export", (req, res) => {
+  res.send(importExportPage)
+})
+
 // ======= Login and Admin =========
 
 const hardcodedUsername = "admin"

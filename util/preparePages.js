@@ -77,10 +77,20 @@ export const javascriptPage = renderPage(javascript,
         bodyClass: "javascript"
     })
 
-const kangaroo = readPage("./public/pages/kangaroo/kangaroo.html")
-export const kangarooPage = renderPage(kangaroo,
+const joeys = readPage("./public/pages/joeys/joeys.html")
+export const joeysPage = renderPage(joeys,
     {
-        tabTitle: "Mandatory I | Kangaroo",
-        cssLinks: `<link rel="stylesheet" href="/pages/kangaroo/kangaroo.css">`,
-        bodyClass: "kangaroo"
+        tabTitle: "Mandatory I | Joeys",
+        cssLinks: `<link rel="stylesheet" href="/pages/joeys/joeys.css">`,
+        bodyClass: "joeys"
     })
+
+const importExport = readPage("./public/pages/import-export/import-export.html")
+export const importExportPage = renderPage(importExport,
+    {
+        tabTitle: "Mandatory I | Import/Export",
+        cssLinks: `<link rel="stylesheet" href="/pages/import-export/import-export.css">`,
+        bodyClass: "import-export"
+    })
+
+    
