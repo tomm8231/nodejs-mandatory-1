@@ -216,11 +216,9 @@ code::before {
     width: 0;
 }
 
-
-
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 780px) {
     .container {
-      grid-template-columns: 1fr; /* Change to a single column layout */
+      grid-template-columns: 1fr;
       grid-template-areas:
       "sidebar"  
       "content"; 
@@ -228,18 +226,16 @@ code::before {
   
     .sidebar {
       grid-area: sidebar;
-      margin: 0; /* Remove margin to save space */
-      min-height: auto; /* Allow the sidebar to adjust its height based on content */
+      margin: 0;
+      min-height: auto;
     }
     
     .content {
-      margin: 0; /* Remove margin to save space */
+      margin: 0;
       padding: 15px;
     }
 
     pre {
         font-size: smaller;
-        word-break:break-word;
-
     }
   }

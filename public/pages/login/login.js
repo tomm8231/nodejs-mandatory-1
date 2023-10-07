@@ -1,3 +1,4 @@
-window.setTimeout(() => {
+/*window.setTimeout(() => {
     window.location.href = "/admin";
-}, 3000);
+}, 3000);*/
+
