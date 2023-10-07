@@ -1,18 +1,17 @@
-<h1>Login</h1>
-
-<form id="login-form" action="/login" method="post">
+<div class="login-form">
     <div>
-        <label for="username">Username:</label>
+        <label for="username">Brugernavn:</label>
         <input type="text" id="username" name="username" required>
     </div>
     <div>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
     </div>
-    <div>
-        <button type="submit">Login</button>
+    <div id="submit-button">
+        <a href="#" id="submit">Log ind</a>
     </div>
-</form>
-<p id="status"></p>
+    <p id="status"></p>
+
+</div>
 
 <script src="/pages/login/login.js"></script>
