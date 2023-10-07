@@ -11,7 +11,7 @@ app.use(express.json())
 
 import {
   frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage,
-  typeCoercionPage, loginPage, adminPage, javascriptPage, joeysPage, importExportPage, restApiDesignPage, learningGoalsPage
+  typeCoercionPage, loginPage, adminPage, javascriptPage, importExportPage, restApiDesignPage, learningGoalsPage
 } from "./util/preparePages.js"
 
 // ================= HTML =================
@@ -42,10 +42,6 @@ app.get("/type-coercion", (req, res) => {
 
 app.get("/javascript", (req, res) => {
   res.send(javascriptPage)
-})
-
-app.get("/joeys", (req, res) => {
-  res.send(joeysPage)
 })
 
 app.get("/import-export", (req, res) => {

@@ -77,14 +77,6 @@ export const javascriptPage = renderPage(javascript,
         bodyClass: "javascript"
     })
 
-const joeys = readPage("./public/pages/joeys/joeys.html")
-export const joeysPage = renderPage(joeys,
-    {
-        tabTitle: "Mandatory I | Joeys",
-        cssLinks: `<link rel="stylesheet" href="/pages/joeys/joeys.css">`,
-        bodyClass: "joeys"
-    })
-
 const importExport = readPage("./public/pages/import-export/import-export.html")
 export const importExportPage = renderPage(importExport,
     {
