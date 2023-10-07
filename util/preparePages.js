@@ -93,4 +93,19 @@ export const importExportPage = renderPage(importExport,
         bodyClass: "import-export"
     })
 
+const restApiDesign = readPage("./public/pages/rest-api-design/rest-api-design.html")
+export const restApiDesignPage = renderPage(restApiDesign,
+    {
+        tabTitle: "Mandatory I | Rest API Design",
+        cssLinks: `<link rel="stylesheet" href="/pages/rest-api-design/rest-api-design.css">`,
+        bodyClass: "rest-api-design"
+    })
+
+    const learningGoals = readPage("./public/pages/learning-goals/learning-goals.html")
+    export const learningGoalsPage = renderPage(learningGoals,
+        {
+            tabTitle: "Mandatory I | Læringsmål",
+            cssLinks: `<link rel="stylesheet" href="/pages/learning-goals/learning-goals.css">`,
+            bodyClass: "learning-goals",
+        })
     

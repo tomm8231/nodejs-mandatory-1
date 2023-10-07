@@ -1,0 +1,119 @@
+<h1>REST API design</h1>
+<p>Et API-design, der er CRUDable, kræver at man følger nogle retningslinjer, så andre, der skal arbejde med det, nemmere kan forstå det. Hvad HTTP-motoderne gør giver langt hen ad vejen sig selv, da det er verber i imperativ: GET, POST, PATCH, PUT, DELETE. Navngivning af endpoints kræver at man kigger på ressourcen, det drejer sig om. I dette tilfælde er det bjerge, og fordi man skriver på engelsk i programmering, bliver det altså "mountains". Dette svarer også til tabellen i databasen, og kaldes desuden for en collection. Kræver HTTP-metoden et enkelt element fra databasen, sættes der et id med i endpointet.</p>
+<p>
+HTTP-metode: GET<br>
+Endpoint: /mountains<br>
+Beskrivelse: Henter en liste over alle bjerge.
+</p>
+<p>
+HTTP-metode: GET<br>
+Endpoint: /mountains/{id}<br>
+Beskrivelse: Henter oplysninger om et specifikt bjerg identificeret ved dens id.
+</p>
+<p>
+HTTP-metode: POST<br>
+Endpoint: /mountains<br>
+Beskrivelse: Opretter et nyt bjerg.
+</p>
+
+<p>
+HTTP-metode: PATCH<br>
+Endpoint: /mountains/{id}<br>
+Beskrivelse: Opdaterer nogle af oplysningerne om et specifikt bjerg identificeret ved dets id.
+</p>
+
+<p>
+HTTP-metode: PUT<br>
+Endpoint: /mountains/{id}<br>
+Beskrivelse: Opdaterer oplysninger om et specifikt bjerg identificeret ved dets id.
+</p>
+<p>
+HTTP-metode: DELETE<br>
+Endpoint: /mountains/{id}<br>
+Beskrivelse: Sletter et specifikt bjerg identificeret ved dets id.
+</p>
+
+<p>Når ovenstående er implementeret i et Node.js-miljø med Express, kan det se således ud:</p>
+
+<pre class="code-snippet">
+	<code class="language-js">
+app.get("/mountains", (req, res) => {
+    res.send({ data: mountains })
+})
+
+app.get("/mountains/:id", (req, res) => {
+    const pathVariableMountainId = Number(req.params.id)
+    const mountainFound = mountains.find((mountain) => mountain.id === pathVariableMountainId)
+
+
+    if (!pathVariableMountainId || pathVariableMountainId < 1) {
+        res.send({ error: "Mountain id must be a number above 0" })
+
+    } else if (!mountainFound) {
+        res.send({ error: "No mountain found with that ID" })
+
+    } else {
+        res.send({ data: mountainFound })
+    }
+})
+
+
+app.post("/mountains", (req, res) => {
+    const newMountain = {
+        "id": ++count,
+        "name": req.body.name,
+        "height": req.body.height
+    }
+    
+    mountains.push(newMountain)
+    res.send({ data: newMountain })
+})
+
+app.delete("/mountains/:id", (req, res) => {
+    const pathVariableMountainId = Number(req.params.id)
+    const indexFound = mountains.findIndex((mountain) => mountain.id === pathVariableMountainId)
+
+    if (indexFound === -1) {
+        res.status(404).send({ error: "No mountain found with that ID" })
+
+    } else {
+        mountains.splice(indexFound, 1)
+        res.send({ data: pathVariableMountainId })
+    }
+})
+
+app.put("/mountains/:id", (req, res) => {
+    const pathVariableMountainId = Number(req.params.id)
+    const mountainFound = mountains.find((mountain) => mountain.id === pathVariableMountainId)
+    const index = mountains.indexOf(mountainFound)
+
+    if (!pathVariableMountainId || pathVariableMountainId < 1) {
+        res.send({ error: "Mountain ID must be a number above 0" })
+
+    } else if (!mountainFound) {
+        res.send({ error: "No mountain found with that ID" })
+
+    } else {
+        mountains[index].id = pathVariableMountainId
+        mountains[index].name = req.body.name
+        mountains[index].height = req.body.height
+        res.send({ data: mountainFound })
+    }
+})
+
+app.patch("/mountains/:id", (req, res) => {
+    const pathVariableMountainId = Number(req.params.id);
+    let foundIndex = mountains.findIndex((mountain) => mountain.id === pathVariableMountainId);
+
+    if (foundIndex === -1) {
+        res.status(404).send({ error: "No mountain found with that ID" })
+
+    } else {
+        mountains[foundIndex] = { ...mountains[foundIndex], ...req.body, id: pathVariableMountainId }
+
+        res.send({ data: mountains[foundIndex] })
+    }
+});               
+	</code>
+</pre>
+<script src="/pages/rest-api-design/rest-api-design.js"></script>

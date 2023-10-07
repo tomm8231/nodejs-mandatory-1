@@ -9,33 +9,35 @@ app.use(express.json())
 
 // =============Read pages ============
 
-import { frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage, 
-  typeCoercionPage, loginPage, adminPage, javascriptPage, joeysPage, importExportPage } from "./util/preparePages.js"
+import {
+  frontpagePage, expressPage, nodejsPage, clientServerModelPage, nodemonPage,
+  typeCoercionPage, loginPage, adminPage, javascriptPage, joeysPage, importExportPage, restApiDesignPage, learningGoalsPage
+} from "./util/preparePages.js"
 
 // ================= HTML =================
 
 app.get("/", (req, res) => {
-    res.send(frontpagePage)
+  res.send(frontpagePage)
 })
 
 app.get("/express", (req, res) => {
-    res.send(expressPage)
+  res.send(expressPage)
 })
 
 app.get("/nodejs", (req, res) => {
-    res.send(nodejsPage)
+  res.send(nodejsPage)
 })
 
 app.get("/nodemon", (req, res) => {
-    res.send(nodemonPage)
+  res.send(nodemonPage)
 })
 
 app.get("/client-server-model", (req, res) => {
-    res.send(clientServerModelPage)
+  res.send(clientServerModelPage)
 })
 
 app.get("/type-coercion", (req, res) => {
-    res.send(typeCoercionPage)
+  res.send(typeCoercionPage)
 })
 
 app.get("/javascript", (req, res) => {
@@ -50,38 +52,46 @@ app.get("/import-export", (req, res) => {
   res.send(importExportPage)
 })
 
+app.get("/rest-api-design", (req, res) => {
+  res.send(restApiDesignPage)
+})
+
+app.get("/learning-goals", (req, res) => {
+  res.send(learningGoalsPage)
+})
+
 // ======= Login and Admin =========
 
 const hardcodedUsername = "admin"
 const hardcodedPassword = "nemathuske"
 
 app.get("/login", (req, res) => {
-    res.send(loginPage)
-  })
+  res.send(loginPage)
+})
 
 
 app.post("/login", (req, res) => {
-    const { username, password } = req.body
-    console.log(username)
-    console.log(password)
-  
-    if (username === hardcodedUsername && password === hardcodedPassword) {
-      res.redirect('/admin')
-    } else {
-      res.status(401).send({ data: 'Login failed' })
-    }
-  })
-  
+  const { username, password } = req.body
+  console.log(username)
+  console.log(password)
 
-  app.get("/admin", (req, res) => {
-    res.send(adminPage)
-  });
-  
+  if (username === hardcodedUsername && password === hardcodedPassword) {
+    res.redirect('/admin')
+  } else {
+    res.status(401).send({ data: 'Login failed' })
+  }
+})
 
 
+app.get("/admin", (req, res) => {
+  res.send(adminPage)
+});
 
-  const PORT = Number(process.env.PORT) || 8080
 
-  app.listen(PORT, () => {
-      console.log("Server is running on port", PORT)
-  })
+
+
+const PORT = Number(process.env.PORT) || 8080
+
+app.listen(PORT, () => {
+  console.log("Server is running on port", PORT)
+})

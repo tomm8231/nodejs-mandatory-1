@@ -98,9 +98,11 @@ p {
 .nodemon .nav-links a.nodemon,
 .client-server-model .nav-links a.client-server-model,
 .type-coercion .nav-links a.type-coercion,
+.learning-goals .nav-links a.learning-goals,
 .joeys .nav-links a.joeys,
 .import-export .nav-links a.import-export,
 .javascript .nav-links a.javascript,
+.rest-api-design .nav-links a.rest-api-design,
 .admin a.admin {
     color: black;
     background-color: white;
@@ -176,7 +178,6 @@ code::before {
   }
 
 
-
 .code-snippet {
     background-color: #282c34;
     font-family: monospace;
@@ -184,12 +185,6 @@ code::before {
 
 .terminal-snippet {
     background-color: rgb(1, 36, 86);
-    font-family: monospace;
-}
-
-.json-snippet {
-    background-color: #4e4e4e;
-    color: yellow;
     font-family: monospace;
 }
 
