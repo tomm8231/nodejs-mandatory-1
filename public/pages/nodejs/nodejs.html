@@ -35,7 +35,7 @@
   dependencies, scripts osv., der ligger i package.json.
 </p>
 <p></p>
-<h2>Eksempel på at oprette et Node-projekt med npm init:</h2>
+<h3>Eksempel på at oprette et Node-projekt med npm init:</h3>
 <pre class="terminal-snippet">
     <code class="language-terminal">
 PS C:\Users\tommy\datamatiker\test> npm init
@@ -59,5 +59,97 @@ keywords: keyword1, keyword2, keyword3
 author: THJ
 license: (ISC) MIT
     </code>
+</pre>
+
+<p>For at starte et Node-projekt skal man fra roden af projektmappen skrive "node" efterfuldt af entry point-filen, i
+  dette
+  tilfælde "app.js":</p>
+
+<pre class="terminal-snippet">
+  <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> node app.js
+Server is running on port 8080
+  </code>
+</pre>
+
+<p>Ovenstående måde er der to ulemper ved:</p>
+<ol class="bullet-points">
+  <li>Indholdet ændres ikke automatisk løbende med, at der laves ændringer i koden. Dette vil kræve, at man stopper
+    og starter programmet med hhv. "ctrl"+"c" og "node app.js"</li>
+  <li>Porten er fastsat til 8080 i app.js, hvilket er fint, når man udvikler, men skal formentlig være en anden, når det
+    skal køres i production mode</li>
+</ol>
+<p>Dette kan dels løses med replacement wrapperen Nodemon <a href="/nodemon">(link)</a> og dels med
+  miljøvariabler.</p>
+<p></p>
+<h3>Miljøvariabler</h3>
+<p>Et nyttigt værktøj at bruge til miljøvariabler er cross-env-modulet, der fungerer på tværs af platforme, og som kan
+  f.eks. injecte miljøvariabler ind afhængig af, om man er ved at udvikle eller kører det som produktion:</p>
+<p>Først installerer man modulet:</p>
+<pre class="terminal-snippet">
+        <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> npm i cross-env
+        </code>
+      </pre>
+<p>Dernæst opretter man følgende to scripts i sin package.json:</p>
+<pre class="code-snippet">
+  <code class="language-json">
+{
+  "scripts": {
+    "start:prod": "cross-env PORT=80 node app.js",
+    "start:dev": "cross-env PORT=8080 nodemon.cmd app.js",
+  }
+}
+  </code>
+</pre>
+<p>start:prod-scriptet sætter man til at køre i produktionen, altså hvor det er deployet, og start:dev køres, når der
+  udvikles i f.eks. et IDE.</p>
+<p>Man kan se at i produktion-mode er porten sat til 80 og 8080 i developer-mode. Derudover og meget væsentligt bruges
+  replacement wrapperen Nodemon i start:dev, da dette er et udviklingsværktøj. Når programmet skal køre rigtigt, skal
+  "node" bruges i stedet.</p>
+<p>Inden disse to scripts kan fungere efter hensigten, hvor porten sættes, skal man i sin entry point-fil finde "PORT",
+  der
+  er sat i de to scripts:</p>
+<pre class="code-snippet">
+  <code class="language-js">
+const PORT = Number(process.env.PORT) || 8080
+
+app.listen(PORT, () => {
+  console.log("Server is running on port", PORT)
+})
+  </code>
+</pre>
+<p>I eksemplet ovenfor sættes porten til 8080 eller 80, hvis man har kørt en af de to scripts, og ellers er den som
+  default sat til 8080, hvis man nu bruger kommandoen "node app.js" eller "nodemon.cmd app.js"</p>
+<p>Fordi alle miljøvariabler er af datatypen String, bliver process.env.PORT parset som Number, inden det gemmes i en
+  variabel, så det kan blive brugt i app.listen()-funktionen</p>
+<p>Når man vil køre en af de to scripts for at sætte en miljøvariabel, skriver man i terminalen:</p>
+<pre class="terminal-snippet">
+  <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> npm run start:dev
+
+> mandatory_1@1.0.0 start:dev
+> cross-env PORT=8080 nodemon.cmd app.js
+
+[nodemon] 3.0.1
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: html,js,json,css
+[nodemon] starting `node app.js`
+Server is running on port 8080
+  </code>
+</pre>
+
+<p>eller</p>
+
+<pre class="terminal-snippet">
+  <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> npm run start:prod
+
+> mandatory_1@1.0.0 start:prod
+> cross-env PORT=80 node app.js
+
+Server is running on port 80
+  </code>
 </pre>
 <script type="module" src="pages/nodejs/nodejs.js"></script>

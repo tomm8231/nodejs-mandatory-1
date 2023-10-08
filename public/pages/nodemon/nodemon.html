@@ -1,13 +1,14 @@
 <h1>Nodemon</h1>
-<p>Som nævnt i afsnittet om Node.js er npm en package manager til Node.js (Node), og med npm kan man installere packages, andre
+<p>Som nævnt i afsnittet om Node.js er npm en package manager til Node.js (Node), og med npm kan man installere
+  packages, andre
   har udviklet til Node. Bl.a. findes der Nodemon, som er et værktøj, der kan behjælpelig i udviklingsfasen med at få
   vist en opdateret udgave af produktet. Altså applikationen genstartes automatisk, når der sker ændringer.</p>
-  
-  <p>Node-projektet monitoreres ved at man bruger Nodemon-kommandoen “nodemon.cmd” (hvis man bruger PC) i stedet for
+
+<p>Node-projektet monitoreres ved at man bruger Nodemon-kommandoen “nodemon.cmd” (hvis man bruger PC) i stedet for
   “node”, fordi Nodemon er en replacement wrapper, efterfulgt af navn og extension på Node-programmet. Det vil i mange
   tilfælde ende med at se ud som følgende: “nodemon.cmd app.js”:</p>
 
-  <pre class="terminal-snippet">
+<pre class="terminal-snippet">
     <code class="language-terminal">
 PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> nodemon.cmd app.js
 [nodemon] 3.0.1
@@ -18,4 +19,37 @@ PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> nodemon.cmd app.js
 Server is running in port 8080
     </code>
   </pre>
-  <script type="module" src="pages/nodemon/nodemon.js"></script>
+
+<p>Som standard holder Nodemon øje med ændringer i filtyperne .js, .mjs, .cjs og .json (se eksemplet ovenfor) Ønsker man
+  at lave om på det, kan
+  man køre kommandoen:</p>
+
+<pre class="terminal-snippet">
+  <code class="language-terminal">
+nodemon --ext html, js, json, css
+  </code>
+</pre>
+<p>Men dette vil skulle køres hver gang, man åbner for programmet. I stedet kan man gemme det i en nodemon.json-fil, som
+  læses hver gang, man kører programmet indledt med nodemon.cmd:</p>
+<pre class="code-snippet">
+  <code class="language-json">
+{
+  "ext": "html, js, json, css"
+}
+    </code>
+</pre>
+<p>Nu er filtyperne, som Nodemon holder øje med, ændret til .html, .js, .json og .css</p>
+<pre class="terminal-snippet">
+  <code class="language-terminal">
+PS C:\Users\tommy\datamatiker\nodejs\mandatory_1> nodemon.cmd app.js
+[nodemon] 3.0.1
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: html,js,json,css
+[nodemon] starting `node app.js`
+Server is running on port 8080
+  </code>
+</pre>
+
+
+<script type="module" src="pages/nodemon/nodemon.js"></script>
